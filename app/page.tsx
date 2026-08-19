@@ -27,19 +27,19 @@ function WelcomePage() {
     login(role)
     switch (role) {
       case "admin":
-        router.push("/admin")
+        router.push("/portal/admin")
         break
       case "scout":
-        router.push("/scout")
+        router.push("/portal/scout")
         break
       case "school":
-        router.push("/school")
+        router.push("/portal/school")
         break
       case "guardian":
-        router.push("/guardian")
+        router.push("/app/guardian")
         break
       case "player":
-        router.push("/player")
+        router.push("/app/player")
         break
     }
   }
