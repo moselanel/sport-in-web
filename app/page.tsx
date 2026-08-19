@@ -3,7 +3,19 @@
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Shield, Users, GraduationCap, Search, Trophy, ChevronRight, Smartphone, Monitor } from "lucide-react"
+import {
+  Shield,
+  Users,
+  GraduationCap,
+  Search,
+  Trophy,
+  ChevronRight,
+  Smartphone,
+  Monitor,
+  Newspaper,
+  MessageSquare,
+  Network,
+} from "lucide-react"
 import { AuthProvider, useAuth } from "@/components/auth-context"
 import type { UserRole } from "@/lib/types"
 
@@ -53,11 +65,11 @@ function WelcomePage() {
       <main className="flex-1 container mx-auto px-4 py-12 md:py-20">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Show Your Talent. Shape Your Future.
+            The Professional Network for Sport.
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            South Africa&apos;s trusted platform connecting young athletes with opportunities through safe,
-            guardian-controlled talent discovery.
+            Connect with athletes, scouts, coaches and schools. Share your journey, grow your network, and get
+            discovered &mdash; with guardian-protected safety built in for every young athlete.
           </p>
         </div>
 
@@ -79,16 +91,16 @@ function WelcomePage() {
             <CardContent className="space-y-4">
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
-                  <Trophy className="h-4 w-4 text-primary" />
-                  <span>Upload highlights & showcase skills</span>
+                  <Newspaper className="h-4 w-4 text-primary" />
+                  <span>Post updates & build your network</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <MessageSquare className="h-4 w-4 text-primary" />
+                  <span>Message connections safely</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Shield className="h-4 w-4 text-primary" />
                   <span>Guardian-controlled privacy & safety</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <ChevronRight className="h-4 w-4 text-primary" />
-                  <span>Complete skill challenges</span>
                 </li>
               </ul>
               <Button className="w-full mt-4 group-hover:bg-primary/90">
@@ -114,16 +126,16 @@ function WelcomePage() {
             <CardContent className="space-y-4">
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
-                  <Trophy className="h-4 w-4 text-accent" />
-                  <span>Discover & scout talent</span>
+                  <Search className="h-4 w-4 text-accent" />
+                  <span>Discover & connect with talent</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Network className="h-4 w-4 text-accent" />
+                  <span>Grow your professional network</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Shield className="h-4 w-4 text-accent" />
                   <span>Manage schools & teams</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <ChevronRight className="h-4 w-4 text-accent" />
-                  <span>Platform administration</span>
                 </li>
               </ul>
               <Button variant="secondary" className="w-full mt-4 group-hover:bg-accent/20">
