@@ -4,18 +4,78 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { mockContactRequests } from "@/lib/mock-data"
-import { Mail, CheckCircle, XCircle, Clock, User } from "lucide-react"
+import { Mail, CheckCircle, XCircle, Clock, User, Shield, Network, MessageSquare } from "lucide-react"
+import { useSocialStore, pendingApprovalsForGuardian, getPerson, useCurrentPersonId } from "@/components/social-store"
 
 export default function GuardianRequests() {
   const pendingRequests = mockContactRequests.filter((r) => r.status === "pending")
   const pastRequests = mockContactRequests.filter((r) => r.status !== "pending")
 
+  const { state, resolveApproval } = useSocialStore()
+  const guardianId = useCurrentPersonId("guardian")
+  const approvals = guardianId ? pendingApprovalsForGuardian(state, guardianId) : []
+
   return (
     <div className="space-y-6 p-4">
       <div>
-        <h1 className="text-xl font-bold text-foreground">Contact Requests</h1>
-        <p className="text-sm text-muted-foreground">{pendingRequests.length} pending approval</p>
+        <h1 className="text-xl font-bold text-foreground">Requests &amp; Approvals</h1>
+        <p className="text-sm text-muted-foreground">
+          {pendingRequests.length + approvals.length} pending approval
+        </p>
       </div>
+
+      {approvals.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+            <Shield className="h-4 w-4" />
+            Network &amp; message approvals
+          </h2>
+          {approvals.map((approval) => {
+            const from = getPerson(state, approval.fromPersonId)
+            const minor = getPerson(state, approval.minorId)
+            return (
+              <Card key={approval.id} className="bg-card border-border">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      {approval.type === "connection" ? (
+                        <Network className="h-5 w-5 text-primary" />
+                      ) : (
+                        <MessageSquare className="h-5 w-5 text-primary" />
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-foreground">{from?.name ?? "A member"}</p>
+                      <p className="text-sm text-muted-foreground">{from?.headline}</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {approval.type === "connection" ? "Wants to connect with" : "Wants to message"}{" "}
+                        {minor?.name ?? "your athlete"}
+                      </p>
+                    </div>
+                    <Badge className="bg-primary/10 text-primary capitalize">{approval.type}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4 p-3 bg-muted/50 rounded-lg">{approval.message}</p>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1 bg-transparent"
+                      onClick={() => resolveApproval(approval.id, "declined")}
+                    >
+                      <XCircle className="h-4 w-4 mr-1" />
+                      Decline
+                    </Button>
+                    <Button size="sm" className="flex-1" onClick={() => resolveApproval(approval.id, "approved")}>
+                      <CheckCircle className="h-4 w-4 mr-1" />
+                      Approve
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+      )}
 
       {pendingRequests.length > 0 && (
         <div className="space-y-4">
@@ -94,7 +154,7 @@ export default function GuardianRequests() {
         </div>
       )}
 
-      {pendingRequests.length === 0 && pastRequests.length === 0 && (
+      {pendingRequests.length === 0 && pastRequests.length === 0 && approvals.length === 0 && (
         <Card className="bg-card border-border">
           <CardContent className="py-12 text-center">
             <Mail className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />

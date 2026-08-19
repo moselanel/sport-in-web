@@ -30,6 +30,9 @@ import {
   Target,
   Mail,
   Shield,
+  Newspaper,
+  Network,
+  MessageSquare,
 } from "lucide-react"
 import { useAuth } from "./auth-context"
 
@@ -43,6 +46,9 @@ interface NavItem {
 const portalNavItems: Record<"admin" | "scout" | "school", NavItem[]> = {
   admin: [
     { label: "Dashboard", href: "/portal/admin", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { label: "Feed", href: "/portal/admin/feed", icon: <Newspaper className="h-5 w-5" /> },
+    { label: "Network", href: "/portal/admin/network", icon: <Network className="h-5 w-5" /> },
+    { label: "Messages", href: "/portal/admin/messages", icon: <MessageSquare className="h-5 w-5" /> },
     { label: "Talent Management", href: "/portal/admin/talents", icon: <Users className="h-5 w-5" /> },
     { label: "Schools", href: "/portal/admin/schools", icon: <GraduationCap className="h-5 w-5" /> },
     { label: "Video Moderation", href: "/portal/admin/videos", icon: <Video className="h-5 w-5" />, badge: 12 },
@@ -52,11 +58,17 @@ const portalNavItems: Record<"admin" | "scout" | "school", NavItem[]> = {
   ],
   scout: [
     { label: "Talent Discovery", href: "/portal/scout", icon: <Search className="h-5 w-5" /> },
+    { label: "Feed", href: "/portal/scout/feed", icon: <Newspaper className="h-5 w-5" /> },
+    { label: "Network", href: "/portal/scout/network", icon: <Network className="h-5 w-5" /> },
+    { label: "Messages", href: "/portal/scout/messages", icon: <MessageSquare className="h-5 w-5" /> },
     { label: "My Requests", href: "/portal/scout/requests", icon: <Mail className="h-5 w-5" /> },
     { label: "Saved Players", href: "/portal/scout/saved", icon: <Users className="h-5 w-5" /> },
   ],
   school: [
     { label: "Dashboard", href: "/portal/school", icon: <LayoutDashboard className="h-5 w-5" /> },
+    { label: "Feed", href: "/portal/school/feed", icon: <Newspaper className="h-5 w-5" /> },
+    { label: "Network", href: "/portal/school/network", icon: <Network className="h-5 w-5" /> },
+    { label: "Messages", href: "/portal/school/messages", icon: <MessageSquare className="h-5 w-5" /> },
     { label: "My Players", href: "/portal/school/players", icon: <Users className="h-5 w-5" /> },
     { label: "Teams & Squads", href: "/portal/school/teams", icon: <Target className="h-5 w-5" /> },
     { label: "Events & Trials", href: "/portal/school/events", icon: <FileText className="h-5 w-5" /> },
