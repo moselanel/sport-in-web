@@ -144,3 +144,90 @@ export interface Notification {
   createdAt: string
   actionUrl?: string
 }
+
+// ── Social network layer ─────────────────────────────────────────────
+
+export type PersonKind = "athlete" | "scout" | "coach" | "guardian" | "admin"
+
+/**
+ * A unified directory entry that spans every kind of member on the network
+ * (athletes, scouts, coaches, guardians). This is the "profile" concept the
+ * social graph, feed, and messaging all reference.
+ */
+export interface Person {
+  id: string
+  name: string
+  kind: PersonKind
+  headline: string
+  avatar?: string
+  province?: string
+  sports: string[]
+  /** Present for athletes; drives the minor-safety rules. */
+  age?: number
+  isMinor: boolean
+  /** For minors: the guardian responsible for approving connections/messages. */
+  guardianId?: string
+  organization?: string
+  verified: boolean
+}
+
+export type ConnectionStatus = "none" | "pending" | "accepted"
+
+export interface Connection {
+  id: string
+  requesterId: string
+  addresseeId: string
+  status: "pending" | "accepted"
+  /** True when this edge involves a minor and is awaiting guardian sign-off. */
+  awaitingGuardian: boolean
+  createdAt: string
+}
+
+export interface Comment {
+  id: string
+  postId: string
+  authorId: string
+  body: string
+  createdAt: string
+}
+
+export interface Post {
+  id: string
+  authorId: string
+  body: string
+  image?: string
+  sportTags: string[]
+  likes: string[] // person ids who liked
+  comments: Comment[]
+  createdAt: string
+}
+
+export interface Message {
+  id: string
+  conversationId: string
+  senderId: string
+  body: string
+  createdAt: string
+}
+
+export interface Conversation {
+  id: string
+  participantIds: string[]
+  messages: Message[]
+  /** True when messaging is blocked pending guardian approval (minor involved). */
+  locked: boolean
+  updatedAt: string
+}
+
+export type GuardianApprovalType = "connection" | "message"
+
+export interface GuardianApproval {
+  id: string
+  type: GuardianApprovalType
+  fromPersonId: string
+  minorId: string
+  guardianId: string
+  message: string
+  status: "pending" | "approved" | "declined"
+  createdAt: string
+}

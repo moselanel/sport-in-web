@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Trophy, Video, Settings, Bell, LogOut, Target, Mail, Home, Upload, User, Users } from "lucide-react"
+import { Trophy, Bell, LogOut, Mail, Home, User, Newspaper, Network, MessageSquare } from "lucide-react"
 import { useAuth } from "./auth-context"
 
 interface NavItem {
@@ -26,16 +26,17 @@ interface NavItem {
 const mobileNavItems: Record<"player" | "guardian", NavItem[]> = {
   player: [
     { label: "Home", href: "/app/player", icon: <Home className="h-5 w-5" /> },
-    { label: "Videos", href: "/app/player/videos", icon: <Video className="h-5 w-5" /> },
-    { label: "Upload", href: "/app/player/upload", icon: <Upload className="h-5 w-5" /> },
-    { label: "Challenges", href: "/app/player/challenges", icon: <Target className="h-5 w-5" /> },
+    { label: "Feed", href: "/app/player/feed", icon: <Newspaper className="h-5 w-5" /> },
+    { label: "Network", href: "/app/player/network", icon: <Network className="h-5 w-5" /> },
+    { label: "Messages", href: "/app/player/messages", icon: <MessageSquare className="h-5 w-5" /> },
     { label: "Profile", href: "/app/player/profile", icon: <User className="h-5 w-5" /> },
   ],
   guardian: [
     { label: "Home", href: "/app/guardian", icon: <Home className="h-5 w-5" /> },
-    { label: "Players", href: "/app/guardian/players", icon: <Users className="h-5 w-5" /> },
+    { label: "Feed", href: "/app/guardian/feed", icon: <Newspaper className="h-5 w-5" /> },
+    { label: "Network", href: "/app/guardian/network", icon: <Network className="h-5 w-5" /> },
+    { label: "Messages", href: "/app/guardian/messages", icon: <MessageSquare className="h-5 w-5" /> },
     { label: "Requests", href: "/app/guardian/requests", icon: <Mail className="h-5 w-5" />, badge: 2 },
-    { label: "Settings", href: "/app/guardian/settings", icon: <Settings className="h-5 w-5" /> },
   ],
 }
 
