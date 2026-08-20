@@ -138,7 +138,7 @@ function WelcomePage() {
                   src="/images/sport-netball.png"
                   alt="Young netball player leaping for the ball"
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
                 <div className="absolute top-4 left-4 h-12 w-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
