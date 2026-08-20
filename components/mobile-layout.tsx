@@ -60,7 +60,7 @@ export function MobileLayout({ children, role }: MobileLayoutProps) {
   return (
     <div className="min-h-[100dvh] w-full bg-muted flex flex-col md:items-center md:justify-center md:p-6">
       {/* Phone frame — full screen on mobile, device mockup on larger screens */}
-      <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-background md:w-[400px] md:h-[840px] md:max-h-[calc(100dvh-3rem)] md:rounded-[2.75rem] md:border-[10px] md:border-neutral-900 md:shadow-2xl md:ring-1 md:ring-black/10">
+      <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-background md:h-[calc(100dvh-3rem)] md:max-h-[860px] md:aspect-[9/19.5] md:w-auto md:rounded-[3rem] md:border-[12px] md:border-neutral-900 md:shadow-2xl md:ring-1 md:ring-black/10">
         {/* Dynamic island / notch — desktop only */}
         <div className="hidden md:block absolute top-2 left-1/2 -translate-x-1/2 z-50 h-6 w-28 rounded-full bg-neutral-900" />
 
