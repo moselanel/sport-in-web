@@ -58,9 +58,14 @@ export function MobileLayout({ children, role }: MobileLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Top Header */}
-      <header className="h-14 border-b border-border bg-card/95 backdrop-blur-sm sticky top-0 z-40 flex items-center px-4 gap-4">
+    <div className="min-h-[100dvh] w-full bg-muted flex flex-col md:items-center md:justify-center md:p-6">
+      {/* Phone frame — full screen on mobile, device mockup on larger screens */}
+      <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-background md:w-[400px] md:h-[840px] md:max-h-[calc(100dvh-3rem)] md:rounded-[2.75rem] md:border-[10px] md:border-neutral-900 md:shadow-2xl md:ring-1 md:ring-black/10">
+        {/* Dynamic island / notch — desktop only */}
+        <div className="hidden md:block absolute top-2 left-1/2 -translate-x-1/2 z-50 h-6 w-28 rounded-full bg-neutral-900" />
+
+        {/* Top Header */}
+        <header className="h-14 border-b border-border bg-card/95 backdrop-blur-sm sticky top-0 z-40 flex items-center px-4 gap-4">
         {/* Logo */}
         <Link href="/app" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
@@ -105,8 +110,8 @@ export function MobileLayout({ children, role }: MobileLayoutProps) {
       {/* Page Content - with bottom padding for nav */}
       <main className="flex-1 pb-20 overflow-auto">{children}</main>
 
-      {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 h-16 bg-card border-t border-border z-50 safe-area-pb">
+      {/* Bottom Navigation Bar — anchored to the phone frame */}
+      <nav className="absolute bottom-0 left-0 right-0 h-16 bg-card border-t border-border z-50 safe-area-pb">
         <div className="flex items-center justify-around h-full max-w-lg mx-auto">
           {items.map((item) => {
             const isActive =
@@ -138,6 +143,7 @@ export function MobileLayout({ children, role }: MobileLayoutProps) {
           })}
         </div>
       </nav>
+      </div>
     </div>
   )
 }
